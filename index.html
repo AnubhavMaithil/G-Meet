@@ -27,30 +27,58 @@
             MyApp._init(user_id, meeting_id)
         })
 
+        function search(){
+        console.log($("#search_participant").val());
+            let input = document.querySelector('#search_participant').value;
+            input=input.toLowerCase();
+            let list = document.getElementsByClassName('participant-name');
+            let participants = document.getElementsByClassName("in-call-wrap");
+            
+            for (i = 0; i < list.length; i++) { 
+                if (!list[i].innerHTML.toLowerCase().includes(input)) {
+
+                    list[i].style.display="none";
+                    participants[i].style.display = "none";
+                }
+                else {
+
+                    participants[i].style.display = "flex";
+                    list[i].style.display="";                 
+                }
+            }
+        }
+        
+        
     </script>
 </head>
 <body>
     <main class=" d-flex flex-column home-wrap">
         <div class="g-top text-light">
             <div class="top-remote-video-show-wrap d-flex">
-                <div id="meetingContainer" class="w-100"  style="display: none; flex-basis: 75%; ">
+                <div id="meetingContainer" class="w-100"  style="display: none; flex-basis: 75%; overflow: hidden;">
                 <div class="call-wrap" style="background-color: black;">
-                <div class="video-wrap" id="divUsers" style="display:flex; flex-wrap:wrap">
-                    <div id="me" class="userbox display-center flex-column">
-                        <h2 class="display-center" style="font-size: 14px;"></h2>
-                        <div class="display-center" id="default">
-                            <video autoplay muted id="locaVideoPlayer"></video>
+                    <div class="video-wrap" id="divUsers" style="display:flex; flex-wrap:wrap">
+                        <div id="me" class="userbox display-center flex-column">
+                            <h2 class="display-center" style="font-size: 14px;"></h2>
+                            <div class="display-center position-relative" id="default">
+                                <!-- <div class="icon display-center position-absolute top-50 start-50 translate-middle" style="width: 45px; height: 45px; border-radius: 50%; background-color: rgba(79, 79, 79, 0.767); cursor: pointer;" onclick="return iconClick()">
+                                    <span class="material-icons pin-video">push_pin</span>
+                                </div> -->
+                                <video autoplay muted id="localVideoPlayer"></video>
+                            </div>
+                        </div>
+                        <div id="otherTemplate" class="userbox display-center flex-column" style="display:none">
+                            <h2 class="display-center" style="font-size: 14px;"></h2>
+                            <div class="display-center position-relative" id="default">
+                                <!-- <div class="icon display-center position-absolute top-50 start-50 translate-middle" style="width: 45px; height: 45px; border-radius: 50%; background-color: rgba(79, 79, 79, 0.767); cursor: pointer;" onclick="return iconClick()">
+                                    <span class="material-icons pin-video">push_pin</span>
+                                </div> -->
+                                <video autoplay muted></video>
+                                <audio autoplay controls style="display:none"></audio>
+                            </div>
                         </div>
                     </div>
-                    <div id="otherTemplate" class="userbox display-center flex-column" style="display:none">
-                        <h2 class="display-center" style="font-size: 14px;"></h2>
-                        <div class="display-center" id="default">
-                            <video autoplay muted></video>
-                            <audio autoplay controls style="display:none"></audio>
-                        </div>
-                    </div>
-                </div>
-                </div>
+                </div>  
             </div>
             <div class="g-right-details-wrap bg-light p-3 text-secondary h-100" style="flex-basis: 25%;  z-index: 1; display: none;">
                 <div class="meeting-heading-wrap d-flex justify-content-between align-items-center pr-3 pl-3" style="height: 10vh;">
@@ -81,7 +109,8 @@
                 </div>
                 <div class="in-call-chat-wrap mr-3 ml-3 pl-3 pr-3" style="font-size: 14px; height: 69vh; overflow-y: scroll;">
                     <div class="in-call-wrap-up" style="display: none !important;">
-                        <div class="in-call-wrap d-flex justify-content-between align-items-center mb-3 pr-2">
+                        <input type="text" name="search" id="search_participant" onkeyup="search()" placeholder="Search Participant" style="width: 100%; padding: 6px; border: 1px solid rgb(5, 86, 86); border-radius: 5px; margin-bottom: 7px;" autocomplete="off" > 
+                        <div class="in-call-wrap justify-content-between align-items-center mb-3 pr-2" style="display: flex;">
                             <div class="participant-img-name-wrap display-center cursor-pointer">
                                 <div class="participant-img">
                                     <img src="public/Assets/images/other.jpg" alt="" class="border border-secondary" style="height: 40px;width: 40px;border-radius: 50%;">
@@ -95,7 +124,7 @@
                                     </span>
                                 </div>
                                 <div class="participant-action-pin display-center mr-2 cursor-pointer">
-                                    <span class="material-icons">
+                                    <span class="material-icons pin-video">
                                         push_pin
                                     </span>
                                 </div>
@@ -152,22 +181,6 @@
                                     <span class="copy_info font-weight-bold" id="copy_info">Copy Joining Info <span style="display: none;background-color: aquamarine; border-radius: 5px;" class="link-conf font-weight-bold p-1">Link Copied</span></span>
                                 </div>
                             </div>
-                            <div class="g-details-heading-show-attachment" style="display: none;position: relative;">
-                                <div class="show-attach-file"></div>
-                                <!-- <div class="upload-attach-file d-flex p-2" style="width:100%; height: 100%; align-items: center;justify-content: center;">
-                                    <form enctype="multipart/form-data" ref="uploadForm" class="d-flex" style="flex-wrap: wrap; gap: 15px;" id="uploadForm">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile" name="imagefile">
-                                            <label for="customFile" class="custom-file-label">Choose File</label>
-                                        </div>
-                                        <div class="share-button-wrap">
-                                            <button class="btn btn-primary btn-sm share-attach" style="padding: 4px 15px;">Share</button>
-                                        </div>
-                                    </form>
-                                </div> -->
-                            
-                            
-                            </div>
                     </div>
                 </div>
                 <div class="display-center cursor-pointer meeting-details-button">
@@ -175,7 +188,7 @@
                 </div>   
             </div>
             <div class="bottom-middle d-flex just-content-center align-items-center" style="height: 10vh; gap: 10px">
-                <div class="mic-toggle-wrap action-icon-style d-flex difvsplay-center cursor-pointer" id="miceMuteUnmute">
+                <div class="mic-toggle-wrap action-icon-style d-flex display-center cursor-pointer" id="miceMuteUnmute">
                     <span class="material-icons">mic_off</span>
                 </div>
                 <div class="end-call-wrap action-icon-style d-flex display-center cursor-pointer">

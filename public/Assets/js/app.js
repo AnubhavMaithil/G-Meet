@@ -22,7 +22,7 @@ var AppProcess = (function () {
         serverProcess = SDP_function;
         my_connection_id = my_connId;
         eventProcess();
-        local_div = document.getElementById("locaVideoPlayer");
+        local_div = document.getElementById("localVideoPlayer");
     }
     function eventProcess() {
         $("#miceMuteUnmute").on("click", async function () {
@@ -441,13 +441,26 @@ var MyApp = (function () {
         newDivId.find("h2").text(other_user_id);
         newDivId.find("video").attr("id", "v_" + connId);
         newDivId.find("audio").attr("id", "a_" + connId);
+        // newDivId.find(".icon").attr("id", connId);
         newDivId.show();
         $("#divUsers").append(newDivId);
 
-        $(".in-call-wrap-up").append('<div class="in-call-wrap d-flex justify-content-between align-items-center mb-3" id="participant_' + connId + '"> <div class="participant-img-name-wrap display-center cursor-pointer"> <div class="participant-img"> <img src="public/Assets/images/other.jpg" alt="" class="border border-secondary" style="height: 40px;width: 40px;border-radius: 50%;"> </div> <div class="participant-name m-2">' + other_user_id + '</div> </div> <div class="participant-action-wrap display-center"> <div class="participant-action-dot display-center mr-2 cursor-pointer"> <span class="material-icons"> more_vert </span> </div> <div class="participant-action-pin display-center mr-2 cursor-pointer"> <span class="material-icons"> push_pin </span> </div> </div> </div>');
+        $(".in-call-wrap-up").append('<div class="in-call-wrap justify-content-between align-items-center mb-3" id="participant_' + connId + '" style="display: flex;"> <div class="participant-img-name-wrap display-center cursor-pointer"> <div class="participant-img"> <img src="public/Assets/images/other.jpg" alt="" class="border border-secondary" style="height: 40px;width: 40px;border-radius: 50%;"> </div> <div class="participant-name m-2">' + other_user_id + '</div> </div> <div class="participant-action-wrap display-center"> <div class="participant-action-dot display-center mr-2 cursor-pointer"> <span class="material-icons"> more_vert </span> </div> <div class="participant-action-pin display-center mr-2 cursor-pointer"> <span class="material-icons pin-video" id=' + connId + '> push_pin </span> </div> </div> </div>');
 
         $(".participant-count").text(userNum);
     }
+
+    $(document).on("click", ".pin-video", function (dets) {
+        console.log(dets.target.id);
+        // $("v_"+dets.target.id).requestFullscreen();
+        $("#v_" + dets.target.id)[0].requestFullscreen();
+    });
+
+    // $(document).on("input", "#search_participant", function(){
+    //     console.log($("#search_participant").val());
+    // })
+
+    
 
     $(document).on("click", ".people-heading", function () {
         $(".chat-show-wrap").hide(300);
@@ -593,57 +606,57 @@ var MyApp = (function () {
         $(".recording-show").toggle(300);
     });
 
-    $(document).on("click", ".start-record", function () {
-        $(this).removeClass().addClass("stop-record btn btn-danger text-light").text("Stop Recording");
-        startRecording();
-    });
+    // $(document).on("click", ".start-record", function () {
+    //     $(this).removeClass().addClass("stop-record btn btn-danger text-light").text("Stop Recording");
+    //     startRecording();
+    // });
 
-    $(document).on("click", ".stop-record", function () {
-        $(this).removeClass().addClass("start-record btn btn-light text-danger").text("Start Recording");
-        mediaRecorder.stop();
-    });
+    // $(document).on("click", ".stop-record", function () {
+    //     $(this).removeClass().addClass("start-record btn btn-light text-danger").text("Start Recording");
+    //     mediaRecorder.stop();
+    // });
 
-    var mediaRecorder;
-    var chunks = [];
+    // var mediaRecorder;
+    // var chunks = [];
 
-    async function captureScreen(mediaContraints = { video: true }) {
-        const screenStream = await navigator.mediaDevices.getDisplayMedia(mediaContraints);
-        return screenStream;
-    }
-    async function captureAudio(mediaContraints = { video: false, audio: true }) {
-        const audioStream = await navigator.mediaDevices.getUserMedia(mediaContraints);
-        return audioStream;
-    }
+    // async function captureScreen(mediaContraints = { video: true }) {
+    //     const screenStream = await navigator.mediaDevices.getDisplayMedia(mediaContraints);
+    //     return screenStream;
+    // }
+    // async function captureAudio(mediaContraints = { video: false, audio: true }) {
+    //     const audioStream = await navigator.mediaDevices.getUserMedia(mediaContraints);
+    //     return audioStream;
+    // }
 
-    async function startRecording() {
-        const screenStream = await captureScreen();
-        const audioSream = await captureAudio();
-        const stream = new MediaStream([...screenStream.getTracks(), ...audioSream.getTracks()]);
-        mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.start();
+    // async function startRecording() {
+    //     const screenStream = await captureScreen();
+    //     const audioSream = await captureAudio();
+    //     const stream = new MediaStream([...screenStream.getTracks(), ...audioSream.getTracks()]);
+    //     mediaRecorder = new MediaRecorder(stream);
+    //     mediaRecorder.start();
 
-        mediaRecorder.onstop = function (e) {
-            var clipName = prompt("Enter a name for recording..");
-            stream.getTracks().forEach((track) => track.stop());
-            const blob = new Blob(chunks, {
-                type: "video/mp4",
-            })
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.style.display = "none";
-            a.href = url;
-            a.download = clipName + ".mp4";
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(() => {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            }, 100);
-        }
-        mediaRecorder.ondataavailable = function (e) {
-            chunks.push(e.data);
-        }
-    }
+    //     mediaRecorder.onstop = function (e) {
+    //         var clipName = prompt("Enter a name for recording..");
+    //         stream.getTracks().forEach((track) => track.stop());
+    //         const blob = new Blob(chunks, {
+    //             type: "video/mp4",
+    //         })
+    //         const url = window.URL.createObjectURL(blob);
+    //         const a = document.createElement("a");
+    //         a.style.display = "none";
+    //         a.href = url;
+    //         a.download = clipName + ".mp4";
+    //         document.body.appendChild(a);
+    //         a.click();
+    //         setTimeout(() => {
+    //             document.body.removeChild(a);
+    //             window.URL.revokeObjectURL(url);
+    //         }, 100);
+    //     }
+    //     mediaRecorder.ondataavailable = function (e) {
+    //         chunks.push(e.data);
+    //     }
+    // }
 
     return {
         _init: function (uid, mid) {

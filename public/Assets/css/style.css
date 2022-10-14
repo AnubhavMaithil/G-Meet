@@ -183,3 +183,30 @@ video{
     width: 160px;
     display: none;
 }
+
+
+#me .icon{
+    opacity: 0;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) .7s;
+}
+#me:hover .icon{
+    opacity: 1;
+}
+
+.userbox .icon{
+    opacity: 0;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) .7s;
+}
+.userbox:hover .icon{
+    opacity: 1;
+}
+
+
+@media(max-width: 500px) {
+    .g-right-details-wrap{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+    }
+}
