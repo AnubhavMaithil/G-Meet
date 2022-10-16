@@ -460,6 +460,12 @@ var MyApp = (function () {
     //     console.log($("#search_participant").val());
     // })
 
+    $(document).on("keypress", ".chat-message-sent-input-field", function(event){
+        if(event.key === "Enter"){
+            event.preventDefault();
+            $(".chat-message-sent-action").click();
+        }
+    });
     
 
     $(document).on("click", ".people-heading", function () {
