@@ -401,7 +401,7 @@ var MyApp = (function () {
                 minute: "numeric",
                 hour12: true
             });
-            var div = $("<div>").html("<span class='font-weight-bold mr-3' style='color: black'>" + data.from + "</span> <small class='text-muted'> " + lTime + "</small> <br>" + data.message);
+            var div = $("<div>").html("<span class='font-weight-bold mr-3 chat-sender' style='color: black; font-size: 15px; text-transform: capitalize;'>" + data.from + "</span> <small class='text-muted'> " + lTime + "</small> <br>" + data.message);
             $("#messages").append(div);
         });
     }
@@ -495,14 +495,19 @@ var MyApp = (function () {
 
     $(document).on("keypress", ".chat-message-sent-input-field", function(event){
         if(event.key === "Enter"){
-            event.preventDefault();
-            $(".chat-message-sent-action").click();
+            if($(".chat-message-sent-input-field").val().trim() === ""){
+                event.preventDefault();
+            }else{
+                event.preventDefault();
+                $(".chat-message-sent-action").click();
+            }
         }
     });
     
 
     $(document).on("click", ".people-heading", function () {
         $(".chat-show-wrap").hide(300);
+        $("#msgbox").focus();
         $(".in-call-wrap-up").show(300);
         $(this).addClass("active");
         $(".chat-heading").removeClass("active");

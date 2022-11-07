@@ -219,6 +219,17 @@ video::-webkit-media-controls-fullscreen-button {
     text-transform: capitalize;
 }
 
+#messages div{
+    padding: 5px;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) .7s;
+}
+#messages div:hover{
+    background-color: #4949491f;
+}
+#messages div span{
+    text-transform: capitalize;
+}
+
 @media(max-width: 500px) {
     .g-right-details-wrap{
         position: absolute;
