@@ -445,15 +445,48 @@ var MyApp = (function () {
         newDivId.show();
         $("#divUsers").append(newDivId);
 
-        $(".in-call-wrap-up").append('<div class="in-call-wrap justify-content-between align-items-center mb-3" id="participant_' + connId + '" style="display: flex;"> <div class="participant-img-name-wrap display-center cursor-pointer"> <div class="participant-img"> <img src="public/Assets/images/other.jpg" alt="" class="border border-secondary" style="height: 40px;width: 40px;border-radius: 50%;"> </div> <div class="participant-name m-2">' + other_user_id + '</div> </div> <div class="participant-action-wrap display-center"> <div class="participant-action-dot display-center mr-2 cursor-pointer"> <span class="material-icons"> more_vert </span> </div> <div class="participant-action-pin display-center mr-2 cursor-pointer"> <span class="material-icons pin-video" id=' + connId + '> push_pin </span> </div> </div> </div>');
+        if(other_user_id == "Sheryians Coding School" || other_user_id == "sheryians coding school"){
+            other_user_id = "Sheryians Coding School";
+        }else if(other_user_id.length>10){
+            other_user_id = other_user_id.substring(0,10)+"...";
+        }else{
+            other_user_id = other_user_id;
+        }
+
+        $(".in-call-wrap-up").append('<div class="in-call-wrap justify-content-between align-items-center mb-3" id="participant_' + connId + '" style="display: flex;"> <div class="participant-img-name-wrap display-center cursor-pointer"> <div class="participant-img"> <img src="public/Assets/images/other.jpg" alt="" class="border border-secondary" style="height: 40px;width: 40px;border-radius: 50%;"> </div> <div class="participant-name m-2">' + other_user_id + '</div> </div> <div class="participant-action-wrap display-center"> <div class="participant-action-dot display-center mr-2 cursor-pointer"> <span class="material-icons"> more_vert </span> </div> <div class="participant-action-pin display-center mr-2 cursor-pointer"> <span class="material-icons pin-video ' + connId + ' " id=' + connId + '> push_pin </span> </div> </div> </div>');
 
         $(".participant-count").text(userNum);
     }
 
+    let flagPin = 0;
     $(document).on("click", ".pin-video", function (dets) {
-        console.log(dets.target.id);
+        // console.log(dets.target.id);
         // $("v_"+dets.target.id).requestFullscreen();
-        $("#v_" + dets.target.id)[0].requestFullscreen();
+        // $("#v_" + dets.target.id)[0].requestFullscreen();
+        if(flagPin === 0){
+            $("#" + dets.target.id)[0].style.width = "100%";
+            $("#" + dets.target.id)[0].style.height = "100%";
+            $("#" + dets.target.id)[0].style.position = "absolute";
+            $("#" + dets.target.id)[0].style.top = "50%";
+            $("#" + dets.target.id)[0].style.left = "50%";
+            $("#" + dets.target.id)[0].style.transform = "translate(-50%,-50%)";
+            $("#" + dets.target.id)[0].style.backgroundColor = "black";
+            $("#" + dets.target.id)[0].style.zIndex = "2";
+            $("#v_" + dets.target.id)[0].style.width = "80vw"; 
+            console.log($("." + dets.target.id)[0]); 
+            flagPin = 1;
+        }else if(flagPin === 1){
+            $("#" + dets.target.id)[0].style.width = "initial";
+            $("#" + dets.target.id)[0].style.height = "initial";
+            $("#" + dets.target.id)[0].style.position = "initial";
+            $("#" + dets.target.id)[0].style.top = "initial";
+            $("#" + dets.target.id)[0].style.left = "initial";
+            $("#" + dets.target.id)[0].style.transform = "initial";
+            $("#" + dets.target.id)[0].style.backgroundColor = "initial";
+            $("#" + dets.target.id)[0].style.zIndex = "initial";
+            $("#v_" + dets.target.id)[0].style.width = "30vw"; 
+            flagPin = 0;
+        }
     });
 
     // $(document).on("input", "#search_participant", function(){
