@@ -22,7 +22,7 @@
         $(function(){
             const urlParams = new URLSearchParams (window.location.search);
             var meeting_id = urlParams.get('meetingID');
-            var user_id = window.prompt('Enter your userid');
+            var user_id = window.prompt('Enter your UserName');
             if (!meeting_id || !user_id){
                 alert('Meeting id or User id missing');
                 window.location.href="/action.html";
