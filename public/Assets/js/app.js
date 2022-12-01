@@ -76,6 +76,20 @@ var AppProcess = (function () {
         }
     }
 
+    function getConnectedDevices(type, callback) {
+        navigator.mediaDevices.enumerateDevices()
+            .then(devices => {
+                const filtered = devices.filter(device => device.kind === type);
+                callback(filtered);
+            });
+    }
+
+    getConnectedDevices('videoinput', function cameras(cameras){
+        console.log(cameras[0].label)
+    }, function error(){
+        console.log(error)
+    });
+
     function connection_status(connection) {
         if (connection &&
             (connection.connectionState == "new" ||
@@ -600,107 +614,11 @@ var MyApp = (function () {
     });
 
 
-
-    // var base_url = window.location.origin;
-
-    // $(document).on("change", ".custom-file-input", function(){
-    //     var fileName = $(this).val().split("\\").pop();
-    //     $(this).siblings(".custom-file-lable").addClass("selected").html(fileName);
-    // });
-
-    // $(document).on("click", ".share-attach", function(event){
-    //     // console.log(event);
-    //     event.preventDefault();
-    //     var attImg = $("#customFile").prop('files')[0];
-    //     var formData = new FormData();
-    //     formData.append('zipfile', attImg);
-    //     formData.append("meeting_id", meeting_id);
-    //     formData.append("username", user_id);
-    //     console.log(formData);
-
-    //     $.ajax({
-    //         url: base_url+"/attachimg",
-    //         type: "POST",
-    //         data: formData,
-    //         contentType: false,
-    //         processData: false,
-    //         success: function(response){
-    //             console.log(response);
-    //         },
-    //         error: function(){
-    //             console.log("error");
-    //         },
-    //     });
-    // });
-
-    // var attachFileArea = document.querySelector(".show-attach-file");
-    // var attachFileName = $("#customFile").val().split("\\").pop();
-
-    // var attachFilePath = "public/attachment/"+meeting_id+"/"+attachFileName;
-    // attachFileArea.innerHTML += "<div class='left-align' style='display:flex; align-items:center;'> <img src='public/assets/images/other.jpg' style='height: 40px; width: 40px;' class='caller-image circle'> <div style='font-weight: 600; margin: 0 5px;'>"+user_id+"</div>:<div><a style='color: #007bff;' href='"+attachFilePath+"' download>"+attachFileName+"</a></div></div><br>";
-    // $("label.custom-file-label").text("");
-    // socket.emit("fileTransferToOther", {
-    //     username: user_id,
-    //     meetingid: meeting_id,
-    //     filePath: attachFilePath,
-    //     fileName: attachFileName
-    // });
-
     $(document).on("click", ".option-icon", function () {
         $(".recording-show").toggle(300);
     });
 
-    // $(document).on("click", ".start-record", function () {
-    //     $(this).removeClass().addClass("stop-record btn btn-danger text-light").text("Stop Recording");
-    //     startRecording();
-    // });
-
-    // $(document).on("click", ".stop-record", function () {
-    //     $(this).removeClass().addClass("start-record btn btn-light text-danger").text("Start Recording");
-    //     mediaRecorder.stop();
-    // });
-
-    // var mediaRecorder;
-    // var chunks = [];
-
-    // async function captureScreen(mediaContraints = { video: true }) {
-    //     const screenStream = await navigator.mediaDevices.getDisplayMedia(mediaContraints);
-    //     return screenStream;
-    // }
-    // async function captureAudio(mediaContraints = { video: false, audio: true }) {
-    //     const audioStream = await navigator.mediaDevices.getUserMedia(mediaContraints);
-    //     return audioStream;
-    // }
-
-    // async function startRecording() {
-    //     const screenStream = await captureScreen();
-    //     const audioSream = await captureAudio();
-    //     const stream = new MediaStream([...screenStream.getTracks(), ...audioSream.getTracks()]);
-    //     mediaRecorder = new MediaRecorder(stream);
-    //     mediaRecorder.start();
-
-    //     mediaRecorder.onstop = function (e) {
-    //         var clipName = prompt("Enter a name for recording..");
-    //         stream.getTracks().forEach((track) => track.stop());
-    //         const blob = new Blob(chunks, {
-    //             type: "video/mp4",
-    //         })
-    //         const url = window.URL.createObjectURL(blob);
-    //         const a = document.createElement("a");
-    //         a.style.display = "none";
-    //         a.href = url;
-    //         a.download = clipName + ".mp4";
-    //         document.body.appendChild(a);
-    //         a.click();
-    //         setTimeout(() => {
-    //             document.body.removeChild(a);
-    //             window.URL.revokeObjectURL(url);
-    //         }, 100);
-    //     }
-    //     mediaRecorder.ondataavailable = function (e) {
-    //         chunks.push(e.data);
-    //     }
-    // }
+    
 
     return {
         _init: function (uid, mid) {
