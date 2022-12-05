@@ -143,12 +143,9 @@ video{
 video::-webkit-media-controls-fullscreen-button {
     display: none;
 }
-/* #default{
-    background-image: url(../images/other.jpg) !important;
-    background-size: no-repeat;
-    background-position: center;
+video::-webkit-media-controls-enclosure {
     overflow: hidden;
-} */
+}
 .active{
     background-color: #005a5a47;
     border-radius: 5px;
@@ -190,12 +187,66 @@ video::-webkit-media-controls-fullscreen-button {
     font-size: 14px;
     padding-left: 10px;
 }
-.recording-show {
+.camera-settings {
     position: absolute;
-    margin-bottom: 130px;
-    margin-right: 90px;
-    width: 160px;
+    margin-bottom: 140px;
+    margin-right: 140px;
+    width: 220px;
     display: none;
+}
+.camera-set{
+    font-size: 20px;
+}
+.camera-settings-options{
+    /* padding: 5px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(60, 60, 60, 0.37);
+    padding: 10px 10px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+.camera-settings-options-wrap{
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    flex-direction: column;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+.camera-settings-options-wrap-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+.items-div{
+    display: flex;
+    gap: 20px;
+}
+
+.camera-settings-options-heading{
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+    border-bottom: 2.5px solid #ccc;
+}
+
+.camera-settings-options-wrap-item-value{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
 }
 
 

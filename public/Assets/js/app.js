@@ -67,12 +67,12 @@ var AppProcess = (function () {
         try {
             var astream = await navigator.mediaDevices.getUserMedia({
                 video: false,
-                audio: true
+                audio: {'echoCancellation': true, 'noiseSuppression': true}
             })
             audio = astream.getAudioTracks()[0];
             audio.enabled = false;
-        } catch (e) {
-            console.log(e);
+        } catch (errorAudio) {
+            console.log(errorAudio);
         }
     }
 
@@ -84,11 +84,65 @@ var AppProcess = (function () {
             });
     }
 
-    getConnectedDevices('videoinput', function cameras(cameras){
-        console.log(cameras[0].label)
-    }, function error(){
-        console.log(error)
+    getConnectedDevices('videoinput', cameras => {
+        // console.log(cameras[0].label)
+        updateCameraList(cameras);
     });
+
+    getConnectedDevices('audioinput', microphones => {
+        // console.log(microphones[0].label)
+        updateMicrophoneList(microphones);
+    });
+
+    getConnectedDevices('audiooutput', speakers => {
+        // console.log(speakers[0].label)
+        updateSpeakerList(speakers);
+    });
+
+    // // Updates the select element with the provided set of cameras
+    const updateCameraList = (cameras) => {
+        const listElement = document.getElementById('camera');
+        listElement.innerHTML = '';
+        cameras.forEach(camera => {
+            const cameraOption = document.createElement('option');
+            cameraOption.label = camera.label;
+            cameraOption.value = camera.deviceId;
+            listElement.appendChild(cameraOption);
+        });
+        console.log(listElement);
+    }
+
+    const updateMicrophoneList = (microphones) => {
+        const listElement = document.getElementById('microphone');
+        listElement.innerHTML = '';
+        microphones.forEach(microphone => {
+            const microphoneOption = document.createElement('option');
+            microphoneOption.label = microphone.label;
+            microphoneOption.value = microphone.deviceId;
+            listElement.appendChild(microphoneOption);
+        });
+        console.log(listElement);
+    }
+
+    const updateSpeakerList = (speakers) => {
+        const listElement = document.getElementById('speaker');
+        listElement.innerHTML = '';
+        speakers.forEach(speaker => {
+            const speakerOption = document.createElement('option');
+            speakerOption.label = speaker.label;
+            speakerOption.value = speaker.deviceId;
+            listElement.appendChild(speakerOption);
+        });
+        console.log(listElement);
+    }
+
+
+    // // Listen for changes to media devices and update the list accordingly
+    navigator.mediaDevices.addEventListener('devicechange', event => {
+        const newCameraList = getConnectedDevices('video');
+        updateCameraList(newCameraList);
+    });
+
 
     function connection_status(connection) {
         if (connection &&
@@ -615,9 +669,16 @@ var MyApp = (function () {
 
 
     $(document).on("click", ".option-icon", function () {
-        $(".recording-show").toggle(300);
+        $(".camera-settings").toggle(300);
     });
-
+    $(document).on("click", ".camera-settings", function () {
+        $(".camera-settings-options").toggle(300);
+        $(".camera-settings").toggle(300);
+    });
+    
+    $(document).on("click", ".camera-settings-options-heading-close", function () {
+        $(".camera-settings-options").hide(300);
+    });
     
 
     return {

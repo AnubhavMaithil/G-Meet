@@ -76,7 +76,7 @@
                             <h2 class="display-center" style="font-size: 14px;"></h2>
                             <div class="display-center position-relative" id="default">
                                 
-                                <video autoplay muted></video>
+                                <video autoplay muted ></video>
                                 <audio autoplay controls style="display:none"></audio>
                             </div>
                         </div>
@@ -199,20 +199,57 @@
                 </div>
                 <div class="video-toggle-wrap action-icon-style d-flex display-center cursor-pointer" id="videoCamOnOff"><span class="material-icons">videocam_off</span></div>
             </div>
-            <div class="bottom-right d-flex just-content-center align-items-center mr-3" id="screenShare-wrap" style="height: 10vh;">
+            <div class="bottom-right d-flex just-content-center align-items-center mr-3" id="screenShare-wrap" style="height: 10vh; gap: 10px;">
                 <div class="present-now-wrap d-flex just-content-center flex-column align-items-center mr-5 cursor-pointer" id="ScreenShareOnOf">
                     <span class="material-icons">present_to_all</span>
                     <div>Present Now</div>
                 </div>
                 
-                <div class="option-wrap cursor-pointer display-center" style="height: 10vh; position:relative;">
-                    <div class="recording-show">
-                        <button class="btn btn-light text-danger start-record">Start Recording</button>
+                <div class="option-wrap cursor-pointer display-center" style="height: 5vh; position:relative;">
+                    <div class="camera-settings">
+                        <button class="btn btn-light text-success camera-set d-flex align-items-center" style="gap: 5px;">Camera Settings <span class="material-icons">settings</span></button>
                     </div>
-                    <div class="option-icon">
-                        <span class="material-icons">more_vert</span>
+                    <div class="option-icon text text-primary">
+                        <span class="material-icons">settings</span>
                     </div>
                 </div>
+
+                <div class="camera-settings-options" style="display: none;">
+                        <div class="camera-settings-options-wrap">
+                            <div class="camera-settings-options-heading d-flex justify-content-evenly align-items-center mb-3" style="gap: 10px;">
+                                <div class="camera-settings-options-heading-title">Camera Settings</div>
+                                <span class="material-icons cursor-pointer camera-settings-options-heading-close">close</span>
+                            </div>
+                            
+                            <div class="camera-settings-options-wrap-item d-flex align-items-center" style="gap: 5px;">
+                                <div class="items-div">
+                                    <span class="material-icons">videocam</span>
+                                    <div class="camera-settings-options-wrap-item-name">Camera</div>
+                                </div>
+                                <div class="camera-settings-options-wrap-item-value">
+                                    <select name="camera" id="camera" class="form-control form-select"></select>
+                                </div>
+                            </div>
+                            <div class="camera-settings-options-wrap-item d-flex align-items-center" style="gap: 5px;">
+                                <div class="items-div">
+                                    <span class="material-icons">mic</span>
+                                    <div class="camera-settings-options-wrap-item-name">Microphone</div>
+                                </div>
+                                <div class="camera-settings-options-wrap-item-value">
+                                    <select name="microphone" id="microphone" class="form-control form-select"></select>
+                                </div>
+                            </div>
+                            <div class="camera-settings-options-wrap-item d-flex align-items-center" style="gap: 5px;">
+                                <div class="items-div">
+                                    <span class="material-icons">speaker</span>
+                                    <div class="camera-settings-options-wrap-item-name">Speaker</div>
+                                </div>
+                                <div class="camera-settings-options-wrap-item-value">
+                                    <select name="speaker" id="speaker" class="form-control form-select"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
         <div class="top-box-show" style="display: none;">
