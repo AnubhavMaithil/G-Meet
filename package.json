@@ -4,7 +4,8 @@
   "description": "Sheryians type of google meet",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server"
+    "start": "node server",
+    "devStart": "nodemon server"
   },
   "author": "",
   "license": "ISC",
