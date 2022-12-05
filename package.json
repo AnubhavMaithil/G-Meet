@@ -2,9 +2,9 @@
   "name": "shery-meet",
   "version": "1.0.0",
   "description": "Sheryians type of google meet",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "npm i \nnode server",
     "devStart": "nodemon server"
   },
   "author": "",
