@@ -100,6 +100,7 @@ var AppProcess = (function () {
     });
 
     // // Updates the select element with the provided set of cameras
+    
     const updateCameraList = (cameras) => {
         const listElement = document.getElementById('camera');
         listElement.innerHTML = '';
