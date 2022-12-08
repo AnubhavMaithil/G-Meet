@@ -529,9 +529,6 @@ var MyApp = (function () {
 
     let flagPin = 0;
     $(document).on("click", ".pin-video", function (dets) {
-        // console.log(dets.target.id);
-        // $("v_"+dets.target.id).requestFullscreen();
-        // $("#v_" + dets.target.id)[0].requestFullscreen();
         if(flagPin === 0){
             $("#" + dets.target.id)[0].style.width = "100%";
             $("#" + dets.target.id)[0].style.height = "100%";
@@ -643,24 +640,7 @@ var MyApp = (function () {
     $(document).on("click", ".meeting-details-button", function () {
         $(".g-details").slideToggle(300);
     });
-    // var detsFlag = 0;
-    // $(document).on("click", ".meeting-details-button", function(){
-    //     if(detsFlag ===0){
-    //         $(".g-details").show(300);
-    //         detsFlag=1;
-    //     }else if(detsFlag ===1){
-    //         $(".g-details").hide(300);
-    //         detsFlag = 0;
-    //     }
-    // });
-
-    // $(document).on("click", ".g-details-heading-attachment", function(){
-    //     $(".g-details-heading-show").hide(200);
-    //     $(".g-details-heading-show-attachment").show(200);
-    //     $(this).addClass("active");
-    //     $(".g-details-heading-detail").removeClass("active");
-    // });
-
+    
     $(document).on("click", ".g-details-heading-detail", function () {
         $(".g-details-heading-show").show(200);
         $(".g-details-heading-show-attachment").hide(200);
