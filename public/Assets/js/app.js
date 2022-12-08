@@ -405,8 +405,6 @@ var MyApp = (function () {
         socket = io.connect();
 
         var SDP_function = function (data, to_connid) {
-            // console.log("harsh")
-            // console.log(data);
             socket.emit("SDPProcess", {
                 message: data,
                 to_connid: to_connid
@@ -448,16 +446,6 @@ var MyApp = (function () {
             }
         });
 
-        socket.on("showFileMessage", function (data) {
-            var time = new Date();
-            var lTime = time.toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true
-            });
-            var attachFileAreaForOther = document.querySelector(".show-attach-file");
-            attachFileAreaForOther.innerHTML += "<div class='left-align' style='display:flex; align-items:center;'> <img src='public/assets/images/other.jpg' style='height: 40px; width: 40px;' class='caller-image circle'> <div style='font-weight: 600; margin: 0 5px;'>" + data.username + "</div>:<div><a style='color: #007bff' href='" + data.FilePath + "' download>" + data.FileName + "</a></div></div><br>";
-        })
 
         socket.on("SDPProcess", async function (data) {
             await AppProcess.processClientFunc(data.message, data.from_connid);

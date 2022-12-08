@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "")));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-    res.render('action');
+    res.send('action');
 });
 
 
